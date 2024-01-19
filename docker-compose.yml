@@ -1,0 +1,22 @@
+services:
+
+  db:
+    image: mysql:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    volumes:
+      - ./.Docker/db/var/lib/mysql:/var/lib/mysql
+      - ./.Docker/files:/files
+      # - ./.Docker/conf:/etc/mysql/conf.d
+    ports:
+      - ${MYSQL_PORT}:3306
+
+  admin_ui:
+    image: phpmyadmin
+    environment:
+      - PMA_HOST=db
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    ports:
+      - ${PMA_PORT}:80
+    depends_on:
+      - db
