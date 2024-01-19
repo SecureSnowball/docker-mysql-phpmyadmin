@@ -14,3 +14,11 @@ Make sure you have docker installed and follow the steps
 
 ## Debugging
 Sometimes the config set on the server is not optimized for importing large files, in this case uncomment the config line in `docker-compose.yml` if your large import is failing with error `mysql server gone away`
+
+## Copying files to the container
+You can also use the `docker compose cp` to copy files to the container. Let's say you have a file at `/mnt/c/dump.sql` and you want to copy it to files in mysql container
+
+```bash
+docker compose cp /mnt/c/dump.sql db:/files/
+```
+
